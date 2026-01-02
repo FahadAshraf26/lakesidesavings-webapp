@@ -44,7 +44,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 mb-12 animate-fade-up delay-300">
             <Button variant="gold" size="xl" asChild>
-              <Link to="/location">
+              <Link to="/location#location-info">
                 <MapPin className="w-5 h-5" />
                 Visit Our Store
               </Link>

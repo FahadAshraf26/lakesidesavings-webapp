@@ -54,7 +54,7 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-card py-16">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
@@ -89,63 +89,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-serif text-lg text-card mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  to="/"
-                  className="text-card/70 hover:text-primary transition-colors text-sm"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
+          {/* Categories */}
+          <div className="lg:col-span-1">
+            <h4 className="font-serif text-lg text-card mb-6">Categories</h4>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              {categories.map((cat) => (
                 <a
+                  key={cat}
                   href={isHomePage ? "#categories" : "/#categories"}
                   onClick={(e) => handleSectionClick(e, "categories")}
                   className="text-card/70 hover:text-primary transition-colors text-sm"
                 >
-                  Categories
+                  {cat}
                 </a>
-              </li>
-              <li>
-                <a
-                  href={isHomePage ? "#about" : "/#about"}
-                  onClick={(e) => handleSectionClick(e, "about")}
-                  className="text-card/70 hover:text-primary transition-colors text-sm"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <Link
-                  to="/location"
-                  className="text-card/70 hover:text-primary transition-colors text-sm"
-                >
-                  Location
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h4 className="font-serif text-lg text-card mb-6">Categories</h4>
-            <ul className="space-y-3">
-              {categories.map((cat) => (
-                <li key={cat}>
-                  <a
-                    href={isHomePage ? "#categories" : "/#categories"}
-                    onClick={(e) => handleSectionClick(e, "categories")}
-                    className="text-card/70 hover:text-primary transition-colors text-sm"
-                  >
-                    {cat}
-                  </a>
-                </li>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Contact Info */}

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone } from "lucide-react";
-import ClosureBanner from "./ClosureBanner";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,6 +54,15 @@ const Header = () => {
     | { name: string; href: string; type: "route" }
     | { name: string; href: string; type: "section"; sectionId: string };
 
+  // Handle home navigation - scroll to top if already on home page
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isHomePage) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   const navLinks: NavLink[] = [
     { name: "Home", href: "/", type: "route" },
     {
@@ -71,16 +79,13 @@ const Header = () => {
   const isTransparent = isHomePage && !isScrolled;
 
   return (
-    <>
-      <ClosureBanner />
-      <header
-        className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
-          isTransparent
-            ? "bg-transparent py-5"
-            : "bg-card/95 backdrop-blur-lg shadow-md py-3"
-        }`}
-        style={{ top: "var(--banner-height, 0px)" }}
-      >
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isTransparent
+          ? "bg-transparent py-5"
+          : "bg-card/95 backdrop-blur-lg shadow-md py-3"
+      }`}
+    >
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -132,6 +137,25 @@ const Header = () => {
                       {link.name}
                     </a>
                   );
+                } else if (link.name === "Home") {
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      onClick={handleHomeClick}
+                      className={`relative font-medium transition-colors duration-300 hover:text-primary ${
+                        isTransparent
+                          ? "text-primary-foreground"
+                          : "text-foreground"
+                      } ${
+                        isActive ? "text-primary" : ""
+                      } after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 ${
+                        isActive ? "after:w-full" : "after:w-0"
+                      } hover:after:w-full`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
                 } else {
                   return (
                     <Link
@@ -172,7 +196,7 @@ const Header = () => {
                 size="lg"
                 asChild
               >
-                <Link to="/location">
+                <Link to="/location#location-info">
                   <MapPin className="w-4 h-4" />
                   Visit Store
                 </Link>
@@ -217,6 +241,21 @@ const Header = () => {
                       {link.name}
                     </a>
                   );
+                } else if (link.name === "Home") {
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      onClick={handleHomeClick}
+                      className={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                        isTransparent
+                          ? "text-primary-foreground hover:bg-primary-foreground/10"
+                          : "text-foreground hover:bg-muted"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
                 } else {
                   return (
                     <Link
@@ -235,7 +274,7 @@ const Header = () => {
                 }
               })}
               <Button variant="hero" size="lg" className="mt-2" asChild>
-                <Link to="/location" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to="/location#location-info" onClick={() => setIsMobileMenuOpen(false)}>
                   <MapPin className="w-4 h-4" />
                   Visit Store
                 </Link>
@@ -243,8 +282,7 @@ const Header = () => {
             </nav>
           </div>
         </div>
-      </header>
-    </>
+    </header>
   );
 };
 

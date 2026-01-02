@@ -123,7 +123,7 @@ const SaleBanner = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="order-1 md:order-2 text-center md:text-left">
+                  <div className="order-1 md:order-2 text-center md:text-left px-4 md:px-0">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 mb-6">
                       {slide.badge === "Clearance Sale" && (
                         <Percent className="w-4 h-4 text-accent" />
@@ -133,13 +133,13 @@ const SaleBanner = () => {
                       </span>
                     </div>
 
-                    <h2 className="text-3xl md:text-5xl font-serif text-primary-foreground mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif text-primary-foreground mb-4">
                       {slide.title}
                       <br />
                       <span className="text-accent">{slide.highlight}</span>
                     </h2>
 
-                    <p className="text-lg text-primary-foreground/80 mb-8 max-w-lg">
+                    <p className="text-base sm:text-lg text-primary-foreground/80 mb-8 max-w-lg mx-auto md:mx-0">
                       {slide.description}
                     </p>
 
